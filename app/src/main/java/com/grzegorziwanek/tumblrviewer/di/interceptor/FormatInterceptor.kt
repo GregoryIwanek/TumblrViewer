@@ -11,8 +11,7 @@ import javax.inject.Inject
  *
  * (02.11.2018)
  * For reference check: https://derek.tumblr.com/api/read/json
- * Tumblr API v1 contains misleading description
- * about returned format of calls to read data.
+ * Tumblr API v1 contains misleading description about returned format of calls to read data.
  * According to description, format of returned data is JSON, but it's a JSON
  * wrapped inside javascript value, ex. "var tumblr_api_read = { JSON_response_content };"
  *
@@ -25,19 +24,39 @@ class FormatInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        val builder = request.newBuilder().put(getJSONBody(request, response))
+        val builder = request.newBuilder()
+
+        if (shouldFormatToJson(response)) builder.put(getJSONBody(request, response))
+
         return chain.proceed(builder.build())
     }
 
-    private fun getJSONBody(request: Request, response: Response): RequestBody {
-        return RequestBody.create(request.body()!!.contentType(), cutToJSON(response.body()!!))
+    private fun shouldFormatToJson(response: Response?): Boolean =
+        if (hasContent(response)) !isJsonFormat(response!!)
+        else false
+
+    private fun hasContent(response: Response?): Boolean =
+        try {
+            !response?.body()?.source()?.exhausted()!!
+        } catch (exception: IOException) {
+            false
+        }
+
+    private fun isJsonFormat(response: Response): Boolean {
+        val str = bodyToString(response.body()!!)
+        cutRedundant(str, false)
+        return str.isBlank()
     }
 
-    private fun cutToJSON(body: ResponseBody): String {
-        val content = bodyToString(body)
+    private fun getJSONBody(request: Request, response: Response): RequestBody =
+        RequestBody.create(request.body()!!.contentType(),
+            cutRedundant(bodyToString(response.body()!!), true))
+
+    private fun cutRedundant(content: String, cutOuterSide: Boolean): String {
         val indexFirst = content.indexOfFirst { it.equals("{") }
         val indexLast = content.indexOfLast { it.equals("}") }
-        return content.substring(indexFirst, indexLast)
+        return if (cutOuterSide) content.substring(indexFirst, indexLast)
+        else content.removeRange(indexFirst, indexLast)
     }
 
     private fun bodyToString(body: ResponseBody): String =

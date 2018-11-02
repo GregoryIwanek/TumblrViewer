@@ -23,7 +23,7 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson) =
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson) : Retrofit =
         Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BASE_API_URL)
@@ -33,11 +33,11 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideThumblrService(retrofit: Retrofit) : TumblrService =
+    fun provideTumblrService(retrofit: Retrofit) : TumblrService =
         retrofit.create(TumblrService::class.java)
 
     companion object {
         const val API_VERSION_1 = "v1/"
-        const val BASE_API_URL = "https://derekg.org/api/read/"
+        const val BASE_API_URL = "https://"
     }
 }
