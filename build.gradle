@@ -22,6 +22,21 @@ allprojects {
     }
 }
 
+project.ext {
+    minSdk = 21
+    targetSdk = 28
+    versionCode = 1
+    versionName = "0.0.1"
+    build_tools_ver = "28.0.3"
+    supp_ver = '28.0.0'
+
+    dagger_ver = '2.19'
+    rx2_binding_ver = '2.2.0'
+    rx2_kotlin_ver = '2.2.0'
+    mosby_ver = '3.1.0'
+    constraint_layout_ver = '1.1.2'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
