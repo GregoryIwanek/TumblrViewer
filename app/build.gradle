@@ -48,7 +48,13 @@ dependencies {
             "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rx2_binding_ver",
             "io.reactivex.rxjava2:rxkotlin:$rx2_kotlin_ver",
             "com.google.dagger:dagger-android-support:$dagger_ver",
-            "com.google.dagger:dagger:$dagger_ver")
+            "com.google.dagger:dagger:$dagger_ver",
+            "com.squareup.okhttp3:okhttp:$okhttp_ver",
+            "com.squareup.retrofit2:retrofit:$retrofit_ver",
+            "com.squareup.retrofit2:converter-gson:$retrofit_ver",
+            "com.squareup.retrofit2:converter-moshi:$retrofit_ver",
+            "com.squareup.retrofit2:adapter-rxjava2:$retrofit_ver"
+    )
 
     testImplementation (
             'junit:junit:4.12',

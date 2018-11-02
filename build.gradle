@@ -9,9 +9,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
@@ -35,6 +32,8 @@ project.ext {
     rx2_kotlin_ver = '2.2.0'
     mosby_ver = '3.1.0'
     constraint_layout_ver = '1.1.2'
+    okhttp_ver = '3.11.0'
+    retrofit_ver = '2.3.0'
 }
 
 task clean(type: Delete) {
