@@ -53,8 +53,8 @@ class FormatInterceptor @Inject constructor() : Interceptor {
             cutRedundant(bodyToString(response.body()!!), true))
 
     private fun cutRedundant(content: String, cutOuterSide: Boolean): String {
-        val indexFirst = content.indexOfFirst { it.equals("{") }
-        val indexLast = content.indexOfLast { it.equals("}") }
+        val indexFirst = content.indexOfFirst { it == CHAR_BRACKET_OPEN }
+        val indexLast = content.indexOfLast { it == CHAR_BRACKET_CLOSE }
         return if (cutOuterSide) content.substring(indexFirst, indexLast)
         else content.removeRange(indexFirst, indexLast)
     }
@@ -67,4 +67,9 @@ class FormatInterceptor @Inject constructor() : Interceptor {
         } catch (exception: IOException) {
             "did not work"
         }
+
+    companion object {
+        private const val CHAR_BRACKET_OPEN = '{'
+        private const val CHAR_BRACKET_CLOSE = '}'
+    }
 }

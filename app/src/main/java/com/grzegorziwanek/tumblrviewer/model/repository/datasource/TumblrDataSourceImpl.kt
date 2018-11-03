@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class TumblrDataSourceImpl @Inject constructor(private val tumblrService: TumblrService) : TumblrDataSource {
 
-    override fun getTumblrBlog(name: String): Observable<String> =
-        tumblrService.getTumblrBlog(name)
+    override fun getBlogByName(name: String): Observable<String> =
+        tumblrService.getBlogByName(name)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

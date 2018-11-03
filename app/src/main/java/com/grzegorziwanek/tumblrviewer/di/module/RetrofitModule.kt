@@ -2,6 +2,8 @@ package com.grzegorziwanek.tumblrviewer.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.grzegorziwanek.tumblrviewer.model.repository.datasource.TumblrDataSource
+import com.grzegorziwanek.tumblrviewer.model.repository.datasource.TumblrDataSourceImpl
 import com.grzegorziwanek.tumblrviewer.model.repository.network.TumblrService
 import dagger.Module
 import dagger.Provides
@@ -36,8 +38,13 @@ class RetrofitModule {
     fun provideTumblrService(retrofit: Retrofit) : TumblrService =
         retrofit.create(TumblrService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideTumblrDataSource(tumblrService: TumblrService): TumblrDataSource =
+        TumblrDataSourceImpl(tumblrService)
+
     companion object {
         const val API_VERSION_1 = "v1/"
-        const val BASE_API_URL = "https://"
+        const val BASE_API_URL = "https://localhost"
     }
 }
