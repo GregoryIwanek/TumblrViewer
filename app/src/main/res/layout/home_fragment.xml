@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<com.grzegorziwanek.tumblrviewer.util.ViewStateFlipper
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/vsf_states"
     android:layout_width="match_parent"
-    android:layout_height="1500dp"
-    android:background="@color/red_500">
+    android:layout_height="match_parent"
+    android:background="@color/color_black">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_posts"
+            android:layout_width="match_parent"
+            android:layout_height="1500dp"
+            android:scrollbars="vertical"
+            android:scrollingCache="true"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</com.grzegorziwanek.tumblrviewer.util.ViewStateFlipper>

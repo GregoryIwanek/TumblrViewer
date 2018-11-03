@@ -5,6 +5,17 @@ import okhttp3.Request
 import okhttp3.Response
 import javax.inject.Inject
 
+/**
+ * Consists of interceptor which removes extra "localhost" string from request.
+ *
+ * Example Tumblr api v1 url: "http://elektranatchios.tumblr.com/"
+ * Part of path which should be set with annotation @Path lies directly after "https://"
+ *
+ * Retrofit has to have base url set.
+ * Retrofit.baseUrl(...) by default can't be just "https://"
+ *
+ * As a result, base url of retrofit was set to "https://localhost" where "localhost" has to be removed.
+ */
 class UrlInterceptor @Inject constructor(): Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {

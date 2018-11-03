@@ -7,5 +7,7 @@ interface HomeView : MvpView {
 
     fun initIntent() : Observable<Unit>
 
+    fun refreshIntent() : Observable<Unit>
+
     fun render(state: HomveViewState)
 }

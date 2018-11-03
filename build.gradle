@@ -34,6 +34,7 @@ project.ext {
     constraint_layout_ver = '1.1.2'
     okhttp_ver = '3.11.0'
     retrofit_ver = '2.3.0'
+    glide_ver = '4.7.1'
 }
 
 task clean(type: Delete) {

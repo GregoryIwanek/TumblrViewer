@@ -44,7 +44,6 @@ class RetrofitModule {
         TumblrDataSourceImpl(tumblrService)
 
     companion object {
-        const val API_VERSION_1 = "v1/"
         const val BASE_API_URL = "https://localhost"
     }
 }

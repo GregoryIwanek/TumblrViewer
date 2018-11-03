@@ -15,7 +15,7 @@ class HomePresenter @Inject constructor(private val interactor: HomeInteractorIm
         val initIntent: Observable<HomveViewState> =
             intent(HomeView::initIntent)
                 .subscribeOn(Schedulers.io())
-                .flatMap { interactor.getBlogByName("derek") }
+                .flatMap { interactor.getBlogByName("elektranatchios") }
                 .observeOn(AndroidSchedulers.mainThread())
 
         subscribeViewState(initIntent, HomeView::render)
