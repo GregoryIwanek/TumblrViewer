@@ -1,7 +1,6 @@
 package com.grzegorziwanek.tumblrviewer.ui.main
 
 import android.os.Bundle
-import android.support.v4.widget.NestedScrollView
 import com.grzegorziwanek.tumblrviewer.R
 import com.grzegorziwanek.tumblrviewer.ui.base.BaseActivity
 import com.grzegorziwanek.tumblrviewer.ui.home.HomeFragment
@@ -24,15 +23,6 @@ class MainActivity : BaseActivity() {
     private fun setup() {
         setSupportActionBar(toolbar)
 
-        nsv_scroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-            if (scrollY < oldScrollY) {
-                animator.animateShow(bnv_navigation, abl_search_bar)
-            } else if (scrollY > oldScrollY) {
-                animator.animateHide(DIRECTION_BOTTOM, bnv_navigation)
-                animator.animateHide(DIRECTION_TOP, abl_search_bar)
-            }
-        })
-
         bnv_navigation.setOnNavigationItemSelectedListener { item ->
             supportActionBar?.title = item.title
             when(item.itemId) {
@@ -41,6 +31,15 @@ class MainActivity : BaseActivity() {
                 R.id.nav_profile -> changeFragment(HomeFragment.newInstance())
             }
             true
+        }
+    }
+
+    fun onChildFragmentScroll(deltaY: Int) {
+        if (deltaY <= 0) {
+            animator.animateShow(bnv_navigation, abl_search_bar)
+        } else {
+            animator.animateHide(DIRECTION_BOTTOM, bnv_navigation)
+            animator.animateHide(DIRECTION_TOP, abl_search_bar)
         }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.grzegorziwanek.tumblrviewer.util.ViewStateFlipper
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.grzegorziwanek.tumblrviewer.util.ViewStateFlipper xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vsf_states"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,8 +15,12 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_posts"
+            android:paddingTop="56dp"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
-            android:layout_height="1500dp"
+            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="layout/post_list_item"
             android:scrollbars="vertical"
             android:scrollingCache="true"/>
     </android.support.v4.widget.SwipeRefreshLayout>

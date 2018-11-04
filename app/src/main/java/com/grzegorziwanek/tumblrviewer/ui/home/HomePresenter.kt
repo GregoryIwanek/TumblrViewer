@@ -15,9 +15,17 @@ class HomePresenter @Inject constructor(private val interactor: HomeInteractorIm
         val initIntent: Observable<HomveViewState> =
             intent(HomeView::initIntent)
                 .subscribeOn(Schedulers.io())
-                .flatMap { interactor.getBlogByName("elektranatchios") }
+                .flatMap { interactor.getBlogByName("the-fungeon-of-lady-lazarus") }
+
+        val scrollIntent: Observable<HomveViewState> =
+            intent(HomeView::scrollIntent)
+                .subscribeOn(Schedulers.io())
+                .map { HomveViewState.ScrollState(it) }
+
+        val intents: Observable<HomveViewState> =
+            Observable.merge(initIntent, scrollIntent)
                 .observeOn(AndroidSchedulers.mainThread())
 
-        subscribeViewState(initIntent, HomeView::render)
+        subscribeViewState(intents, HomeView::render)
     }
 }

@@ -1,10 +1,9 @@
 <resources>
 
-    <style name="AppTheme" parent="BaseTheme" />
-
     <!-- Base application theme. -->
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/grey_1000</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -16,5 +15,24 @@
         <item name="android:indeterminate">true</item>
         <item name="android:indeterminateTint">@color/orange_700</item>
         <item name="android:indeterminateTintMode">src_atop</item>
+    </style>
+
+    <style name="TextMedium" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="ClickableText" parent="TextMedium">
+        <item name="android:textColor">@color/blue_A700</item>
+    </style>
+
+    <style name="BaseButton" parent="Base.Widget.AppCompat.ActionButton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blue_A700</item>
+    </style>
+
+    <style name="ChipTextStyle" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/color_black</item>
     </style>
 </resources>

@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.grzegorziwanek.tumblrviewer.R
 import com.grzegorziwanek.tumblrviewer.ui.base.BaseMosbyFragment
+import com.grzegorziwanek.tumblrviewer.ui.main.MainActivity
+import com.grzegorziwanek.tumblrviewer.util.ImageLoader
+import com.jakewharton.rxbinding2.support.v7.widget.RecyclerViewScrollEvent
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -16,7 +19,11 @@ import javax.inject.Inject
 class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
 
     @Inject
+    lateinit var imageLoader: ImageLoader
+    @Inject
     lateinit var presenter: HomePresenter
+
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -29,7 +36,13 @@ class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setAdapter()
         setupStates()
+    }
+
+    private fun setAdapter() {
+        adapter = HomeAdapter(imageLoader)
+        rv_posts.adapter = adapter
     }
 
     private fun setupStates() {
@@ -47,12 +60,22 @@ class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
         Observable.just(Unit)
             .delay(BASE_MOSBY_RX_DELAY, TimeUnit.MILLISECONDS)
 
+    override fun scrollIntent(): Observable<Int> =
+        RxRecyclerView.scrollEvents(rv_posts)
+            .debounce(MIN_MOSBY_RX_DEBOUNCE, TimeUnit.MILLISECONDS)
+            .map { t: RecyclerViewScrollEvent -> t.dy() }
+
     override fun render(state: HomveViewState) {
         when(state) {
             is HomveViewState.ProgressState -> renderProgress()
             is HomveViewState.DataState -> renderData(state)
             is HomveViewState.ErrorState -> renderError()
+            is HomveViewState.ScrollState -> renderScroll(state)
         }
+    }
+
+    private fun renderScroll(state: HomveViewState.ScrollState) {
+        (activity as MainActivity).onChildFragmentScroll(state.deltaY)
     }
 
     private fun renderProgress() {
@@ -60,7 +83,7 @@ class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
     }
 
     private fun renderData(state: HomveViewState.DataState) {
-        Toast.makeText(context, state.any.toString(), Toast.LENGTH_LONG).show()
+        adapter.setData(state.blog.posts)
         vsf_states.showContent()
     }
 

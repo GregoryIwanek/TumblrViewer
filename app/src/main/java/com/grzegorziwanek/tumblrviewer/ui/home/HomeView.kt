@@ -9,5 +9,7 @@ interface HomeView : MvpView {
 
     fun refreshIntent() : Observable<Unit>
 
+    fun scrollIntent() : Observable<Int>
+
     fun render(state: HomveViewState)
 }

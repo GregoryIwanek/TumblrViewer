@@ -33,9 +33,9 @@ class NetworkModule {
             .addInterceptor(urlInterceptor)
             .addInterceptor(formatInterceptor)
             .cache(cache)
-            .readTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
-            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
             .build()
 
     companion object {

@@ -15,5 +15,6 @@ abstract class BaseMosbyFragment<V : MvpView, P : MviBasePresenter<V, *>> : MviF
     companion object {
         val BASE_MOSBY_RX_DELAY : Long = 500
         val BASE_MOSBY_RX_DEBOUNCE : Long = 750
+        val MIN_MOSBY_RX_DEBOUNCE : Long = 50
     }
 }
