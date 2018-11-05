@@ -7,6 +7,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/pink_200</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/blue_grey_600</item>
     </style>
@@ -22,7 +23,7 @@
         <item name="android:textColor">@color/color_black</item>
     </style>
 
-    <style name="ClickableText" parent="TextMedium">
+    <style name="ClickableText" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">@color/blue_A700</item>
     </style>
 

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:clipToPadding="false"
+    android:paddingBottom="16dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:background="@color/color_white"
+        android:elevation="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/color_background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/barrier2"/>
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/grey_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:padding="4dp"
+            android:maxLength="50"
+            style="@style/TextMedium"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintEnd_toStartOf="@+id/fl_ripple_container"
+            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar"
+            tools:text="name_of_the_blog" />
+
+        <FrameLayout
+            android:id="@+id/fl_ripple_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color_background_light"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="24dp"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar" >
+
+            <TextView
+                style="@style/ClickableText"
+                android:textSize="14sp"
+                android:padding="8dp"
+                android:id="@+id/btn_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/favorites"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </FrameLayout>
+
+        <android.support.constraint.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_name, iv_avatar, fl_ripple_container"/>
+
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textColor="@color/color_black"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/barrier2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="lorem ipsum" />
+
+        <TextView
+            android:id="@+id/tv_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:padding="16dp"
+            tools:text="lorem ipsum"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+        <TextView
+            android:id="@+id/tv_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textColor="@color/color_black"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/tv_answer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="lorem ipsum" />
+
+        <TextView
+            android:id="@+id/tv_tags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:padding="16dp"
+            tools:text="lorem ipsum"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_caption" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

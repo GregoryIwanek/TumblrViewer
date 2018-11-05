@@ -13,12 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseTheme" >
-        <activity android:name=".ui.SpalshScreen"
-            android:screenOrientation="portrait"
-            android:theme="@style/BaseTheme"/>
         <activity android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/BaseTheme">
+            android:theme="@style/BaseTheme"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

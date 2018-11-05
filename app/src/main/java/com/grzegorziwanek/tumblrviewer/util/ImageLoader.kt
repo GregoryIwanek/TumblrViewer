@@ -14,9 +14,4 @@ class ImageLoader @Inject constructor(private val context: Context) {
             .load(url)
             .placeholder(placeholderId)
             .into(receiver)
-
-    fun loadImageFromResGlide(resId: Int, receiver: ImageView) =
-        GlideApp.with(context)
-            .load(resId)
-            .into(receiver)
 }

@@ -2,9 +2,9 @@ package com.grzegorziwanek.tumblrviewer.util
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.ViewFlipper
 
 /**
@@ -34,9 +34,6 @@ class ViewStateFlipper : ViewFlipper {
         }
     }
 
-    private fun printChildInfo() =
-        Log.e("ViewStateWrapper", "child count: $childCount, base child count: $baseViewsCount")
-
     fun showContent() =
         if (baseViewsCount < childCount) displayedChild = childCount
         else throw IllegalStateException("ViewStateWrapper can only host one direct child!")
@@ -53,28 +50,12 @@ class ViewStateFlipper : ViewFlipper {
         if (this::progressView.isInitialized) displayedChild = indexOfChild(progressView)
         else throw IllegalStateException("ViewStateWrapper progress view hasn't been initialized")
 
-    fun setErrorView(errorView: View) {
-        if (!this::errorView.isInitialized) {
-            baseViewsCount++
-        }
-        this.errorView = errorView
-        addView(errorView)
-    }
-
     fun setErrorView(layoutResId: Int) {
         if (!this::errorView.isInitialized) {
             baseViewsCount++
         }
         this.errorView = inflater.inflate(layoutResId, this, false)
         addView(errorView)
-    }
-
-    fun setEmptyView(emptyView: View) {
-        if (!this::emptyView.isInitialized) {
-            baseViewsCount++
-        }
-        this.emptyView = emptyView
-        addView(emptyView)
     }
 
     fun setEmptyView(layoutResId: Int) {
@@ -85,12 +66,13 @@ class ViewStateFlipper : ViewFlipper {
         addView(emptyView)
     }
 
-    fun setProgressView(progressView: View) {
-        if (!this::progressView.isInitialized) {
+    fun setEmptyViewWithMessage(layoutResId: Int, pairs: List<Pair<Int, Int>>) {
+        if (!this::emptyView.isInitialized) {
             baseViewsCount++
         }
-        this.progressView = progressView
-        addView(progressView)
+        this.emptyView = inflater.inflate(layoutResId, this, false)
+        pairs.forEach { pair -> emptyView.findViewById<TextView>(pair.first).setText(pair.second) }
+        addView(emptyView)
     }
 
     fun setProgressView(layoutResId: Int) {

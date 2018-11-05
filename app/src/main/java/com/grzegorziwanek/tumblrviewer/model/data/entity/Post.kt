@@ -13,4 +13,10 @@ data class Post(val id: String,
                 val tags: List<String>,
                 val type: String,
                 @SerializedName("tumblelog")
-                val tumbleLogInner: TumblelogInner)
+                val tumbleLogInner: TumblelogInner,
+                @SerializedName("photo-caption")
+                val caption: String,
+                @SerializedName("regular-body")
+                val regularBody: String,
+                val question: String,
+                val answer: String)

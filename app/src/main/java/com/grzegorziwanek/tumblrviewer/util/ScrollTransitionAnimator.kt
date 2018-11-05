@@ -2,6 +2,11 @@ package com.grzegorziwanek.tumblrviewer.util
 
 import android.view.View
 
+/**
+ * Class responsible for elements transition animator.
+ *
+ * Used to animate hide/show of top elements ( ex. Toolbar) and bottom elements ( ex. BottomNavigation)
+ */
 class ScrollTransitionAnimator {
 
     fun animateShow(vararg views: View) {

@@ -2,9 +2,14 @@ package com.grzegorziwanek.tumblrviewer.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.grzegorziwanek.tumblrviewer.model.data.database.AppDatabase
+import com.grzegorziwanek.tumblrviewer.model.domain.interactor.*
+import com.grzegorziwanek.tumblrviewer.model.repository.database.DatabaseRepository
+import com.grzegorziwanek.tumblrviewer.model.repository.database.DatabaseRepositoryImpl
 import com.grzegorziwanek.tumblrviewer.model.repository.datasource.TumblrDataSource
 import com.grzegorziwanek.tumblrviewer.model.repository.datasource.TumblrDataSourceImpl
 import com.grzegorziwanek.tumblrviewer.model.repository.network.TumblrService
+import com.grzegorziwanek.tumblrviewer.model.repository.storage.SearchStorage
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -40,8 +45,29 @@ class RetrofitModule {
 
     @Provides
     @Singleton
+    fun provideDatabaseRepository(appDatabase: AppDatabase): DatabaseRepository =
+        DatabaseRepositoryImpl(appDatabase)
+
+    @Provides
+    @Singleton
     fun provideTumblrDataSource(tumblrService: TumblrService): TumblrDataSource =
         TumblrDataSourceImpl(tumblrService)
+
+    @Provides
+    @Singleton
+    fun provideBlogInteractor(tumblrDataSource: TumblrDataSource,
+                              storage: SearchStorage): BlogInteractor =
+        BlogInteractorImpl(tumblrDataSource, storage)
+
+    @Provides
+    @Singleton
+    fun provideSearchInteractor(storage: SearchStorage): SearchInteractor =
+        SearchInteractorImpl(storage)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteInteractor(databaseRepository: DatabaseRepository): FavoritesInteractor =
+        FavoritesInteractorImpl(databaseRepository)
 
     companion object {
         const val BASE_API_URL = "https://localhost"

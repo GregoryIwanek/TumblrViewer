@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">TumblrViewer</string>
-    <string name="favorites">Obserwuj</string>
+    <string name="favorites">Ulubione</string>
+    <string name="no_results">Brak wyników</string>
+    <string name="add_blog_name">Wpisz nazwę bloga do wyszukania</string>
+    <string name="try_again">Spróbuj ponownie</string>
+    <string name="something_went_wrong">Coś poszło nie tak</string>
+    <string name="home">Główna</string>
+    <string name="search">Szukaj</string>
+    <string name="search_saved">Wyszukiwanie zachowane</string>
+    <string name="last_search_read">Odczytano ostatnie wyszukiwanie</string>
+    <string name="add_favorites_first">Musisz dodać ulubione</string>
+    <string name="added_to_favorites">Dodano do ulubionych</string>
 </resources>
