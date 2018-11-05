@@ -2,6 +2,7 @@ package com.grzegorziwanek.tumblrviewer.di.module
 
 import android.content.Context
 import com.grzegorziwanek.tumblrviewer.di.interceptor.FormatInterceptor
+import com.grzegorziwanek.tumblrviewer.di.interceptor.UrlInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -26,13 +27,15 @@ class NetworkModule {
     @Provides
     @Singleton
     fun okHttpClient(formatInterceptor: FormatInterceptor,
+                     urlInterceptor: UrlInterceptor,
                      cache: Cache) : OkHttpClient =
         OkHttpClient.Builder()
+            .addInterceptor(urlInterceptor)
             .addInterceptor(formatInterceptor)
             .cache(cache)
-            .readTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
-            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
             .build()
 
     companion object {

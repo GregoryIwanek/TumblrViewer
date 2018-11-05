@@ -7,12 +7,8 @@ import dagger.android.support.DaggerApplication
 
 class App : DaggerApplication() {
 
-    override fun onCreate() {
-        super.onCreate()
-    }
-
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         DaggerMainComponent.builder()
-            .contextModule(ContextModule(this))
+            .contextModule(ContextModule(this.applicationContext))
             .create(this)
 }

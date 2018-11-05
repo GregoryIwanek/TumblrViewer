@@ -1,8 +1,9 @@
 package com.grzegorziwanek.tumblrviewer.model.repository.datasource
 
+import com.grzegorziwanek.tumblrviewer.model.data.entity.Blog
 import io.reactivex.Observable
 
 interface TumblrDataSource {
 
-    fun getTumblrBlog(name: String): Observable<String>
+    fun getBlogByName(name: String): Observable<Blog>
 }
