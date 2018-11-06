@@ -1,4 +1,4 @@
-package com.grzegorziwanek.tumblrviewer.ui.base
+package com.grzegorziwanek.tumblrviewer.ui.common.base
 
 import android.content.Context
 import android.support.v4.app.Fragment

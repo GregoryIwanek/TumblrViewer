@@ -1,4 +1,4 @@
-package com.grzegorziwanek.tumblrviewer.ui.base
+package com.grzegorziwanek.tumblrviewer.ui.common.base
 
 interface OnGenericClickListener<T> {
 

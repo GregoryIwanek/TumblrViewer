@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TumblrViewer</string>
-    <string name="favorites">Ulubione</string>
+    <string name="follow">Obserwuj</string>
+    <string name="favourites">Ulubione</string>
     <string name="no_results">Brak wyników</string>
     <string name="add_blog_name">Wpisz nazwę bloga do wyszukania</string>
     <string name="try_again">Spróbuj ponownie</string>

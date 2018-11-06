@@ -3,7 +3,7 @@ package com.grzegorziwanek.tumblrviewer.ui.main
 import android.os.Bundle
 import android.view.MenuItem
 import com.grzegorziwanek.tumblrviewer.R
-import com.grzegorziwanek.tumblrviewer.ui.base.BaseActivity
+import com.grzegorziwanek.tumblrviewer.ui.common.base.BaseActivity
 import com.grzegorziwanek.tumblrviewer.ui.favorites.FavoritesFragment
 import com.grzegorziwanek.tumblrviewer.ui.home.HomeFragment
 import com.grzegorziwanek.tumblrviewer.ui.search.SearchFragment

@@ -9,11 +9,9 @@ interface SearchView : MvpView {
 
     fun initIntent() : Observable<Unit>
 
-    fun refreshIntent() : Observable<Unit>
-
     fun clearSearchIntent() : Observable<Unit>
 
-    fun favoriteIntent() : Observable<Favourite>
+    fun addFavoriteIntent() : Observable<Favourite>
 
     fun searchIntent() : Observable<String>
 

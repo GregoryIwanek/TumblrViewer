@@ -27,7 +27,7 @@ class HomePresenter @Inject constructor(private val interactor: BlogInteractorIm
                 .flatMap { interactor.getBlogByName(it) }
 
         val favoriteIntent: Observable<BlogViewState> =
-            intent(HomeView::favoriteIntent)
+            intent(HomeView::addFavoriteIntent)
                 .subscribeOn(Schedulers.io())
                 .flatMap { favoritesInteractor.insertFavorite(it) }
                 .map<BlogViewState> { BlogViewState.MessageState( R.string.added_to_favorites) }

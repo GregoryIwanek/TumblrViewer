@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.grzegorziwanek.tumblrviewer.R
 import com.grzegorziwanek.tumblrviewer.model.data.entity.Favourite
-import com.grzegorziwanek.tumblrviewer.ui.base.BaseMosbyFragment
+import com.grzegorziwanek.tumblrviewer.ui.common.base.BaseMosbyFragment
 import com.grzegorziwanek.tumblrviewer.ui.main.MainActivity
 import com.grzegorziwanek.tumblrviewer.util.ImageLoader
 import com.grzegorziwanek.tumblrviewer.util.ScrollTransitionAnimator
@@ -32,9 +32,8 @@ class FavoritesFragment : BaseMosbyFragment<FavoritesView, FavoritesPresenter>()
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_favourite, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_favourite, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +43,7 @@ class FavoritesFragment : BaseMosbyFragment<FavoritesView, FavoritesPresenter>()
     }
 
     private fun setToolbar() {
-        toolbar.title = getString(R.string.favorites)
+        toolbar.title = getString(R.string.favourites)
     }
 
     private fun setAdapter() {

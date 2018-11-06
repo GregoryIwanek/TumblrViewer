@@ -34,16 +34,23 @@
         android:layout_height="0dp"
         android:background="@color/color_black">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_posts"
-            android:clipToPadding="false"
-            android:paddingTop="56dp"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="layout/post_list_item"
-            android:scrollbars="vertical"
-            android:scrollingCache="true"/>
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_posts"
+                android:clipToPadding="false"
+                android:paddingTop="56dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="layout/post_list_item"
+                android:scrollbars="vertical"
+                android:scrollingCache="true"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </com.grzegorziwanek.tumblrviewer.util.ViewStateFlipper>
 </android.support.constraint.ConstraintLayout>
 

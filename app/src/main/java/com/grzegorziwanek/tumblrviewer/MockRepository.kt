@@ -7,13 +7,14 @@ object MockRepository {
 
     fun mockBlog(): Blog {
         return Blog(mockTumblelog(),
-            List(4) { Post("", "url", "photo_medium", "photo_large",
+            List(4) { _ ->
+                Post("", "url", "photo_medium", "photo_large",
                 List(4) { mockPhoto()}, List(4) {"tag"},  "photo", mockTumblelogInner(),
                 "photo caption", "regular body", "question", "answer") })
     }
 
     private fun mockTumblelog(): Tumblelog {
-        return Tumblelog("title", "description", "name", "cname")
+        return Tumblelog("title", "description", "name")
     }
 
     private fun mockTumblelogInner(): TumblelogInner {

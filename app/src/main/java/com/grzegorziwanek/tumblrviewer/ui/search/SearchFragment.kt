@@ -8,10 +8,10 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.grzegorziwanek.tumblrviewer.R
 import com.grzegorziwanek.tumblrviewer.model.data.entity.Favourite
-import com.grzegorziwanek.tumblrviewer.ui.base.BaseActivity
-import com.grzegorziwanek.tumblrviewer.ui.base.BaseMosbyFragment
 import com.grzegorziwanek.tumblrviewer.ui.common.BlogAdapter
 import com.grzegorziwanek.tumblrviewer.ui.common.BlogViewState
+import com.grzegorziwanek.tumblrviewer.ui.common.base.BaseActivity
+import com.grzegorziwanek.tumblrviewer.ui.common.base.BaseMosbyFragment
 import com.grzegorziwanek.tumblrviewer.ui.main.MainActivity
 import com.grzegorziwanek.tumblrviewer.util.ImageLoader
 import com.grzegorziwanek.tumblrviewer.util.ScrollTransitionAnimator
@@ -39,9 +39,8 @@ class SearchFragment : BaseMosbyFragment<SearchView, SearchPresenter>(), SearchV
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_search, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +70,7 @@ class SearchFragment : BaseMosbyFragment<SearchView, SearchPresenter>(), SearchV
         btn_clear.clicks()
             .debounce(BASE_MOSBY_RX_DEBOUNCE, TimeUnit.MILLISECONDS)
 
-    override fun favoriteIntent(): Observable<Favourite> =
+    override fun addFavoriteIntent(): Observable<Favourite> =
         adapter.addFavoriteClicked()
 
     override fun searchIntent(): Observable<String> =
@@ -79,10 +78,6 @@ class SearchFragment : BaseMosbyFragment<SearchView, SearchPresenter>(), SearchV
             .filter { it.actionId() == EditorInfo.IME_ACTION_SEARCH }
             .map { et_search.text.toString() }
             .doOnNext { (activity as BaseActivity).hideKeyboard() }
-
-    override fun refreshIntent(): Observable<Unit> =
-        Observable.just(Unit)
-            .delay(BASE_MOSBY_RX_DELAY, TimeUnit.MILLISECONDS)
 
     override fun scrollIntent(): Observable<Int> =
         RxRecyclerView.scrollEvents(rv_suggestion)
@@ -141,7 +136,5 @@ class SearchFragment : BaseMosbyFragment<SearchView, SearchPresenter>(), SearchV
         fun newInstance(): SearchFragment {
             return SearchFragment()
         }
-
-        val TAG = SearchFragment::class.java.simpleName
     }
 }

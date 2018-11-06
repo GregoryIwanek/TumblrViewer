@@ -7,11 +7,9 @@ import io.reactivex.Observable
 
 interface HomeView : MvpView {
 
-    fun initIntent() : Observable<Unit>
+    fun initIntent() : Observable<Any>
 
-    fun refreshIntent() : Observable<Unit>
-
-    fun favoriteIntent() : Observable<Favourite>
+    fun addFavoriteIntent() : Observable<Favourite>
 
     fun scrollIntent() : Observable<Int>
 

@@ -1,4 +1,4 @@
-package com.grzegorziwanek.tumblrviewer.ui.base
+package com.grzegorziwanek.tumblrviewer.ui.common.base
 
 import com.grzegorziwanek.tumblrviewer.util.ScrollTransitionAnimator
 import com.hannesdorfmann.mosby3.mvi.MviBasePresenter

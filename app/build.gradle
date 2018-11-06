@@ -16,6 +16,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-test-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -25,6 +28,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -64,13 +73,14 @@ dependencies {
             "android.arch.persistence.room:rxjava2:$room_version"
     )
 
+    androidTestImplementation (
+            'androidx.test:runner:1.1.0',
+            'com.android.support.test:runner:1.0.2'
+    )
+
     testImplementation (
             'junit:junit:4.12',
-            "org.robolectric:robolectric:3.7",
-            "org.robolectric:shadows-support-v4:3.3.2",
-            'org.mockito:mockito-core:2.7.22',
-            "org.robolectric:robolectric:4.0" )
+            'org.mockito:mockito-core:2.7.22')
 
     testAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger_ver"
-
 }

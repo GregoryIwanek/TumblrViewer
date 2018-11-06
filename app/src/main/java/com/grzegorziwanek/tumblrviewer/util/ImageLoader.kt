@@ -9,7 +9,7 @@ import javax.inject.Inject
  */
 class ImageLoader @Inject constructor(private val context: Context) {
 
-    fun loadImageFromUrlGlide(url: String?, placeholderId: Int, receiver: ImageView) =
+    fun loadImageFromUrl(url: String?, placeholderId: Int, receiver: ImageView) =
         GlideApp.with(context)
             .load(url)
             .placeholder(placeholderId)

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.grzegorziwanek.tumblrviewer.R
 import com.grzegorziwanek.tumblrviewer.model.data.entity.Favourite
 import com.grzegorziwanek.tumblrviewer.model.data.entity.Post
-import com.grzegorziwanek.tumblrviewer.ui.base.OnGenericClickListener
+import com.grzegorziwanek.tumblrviewer.ui.common.base.OnGenericClickListener
 import com.grzegorziwanek.tumblrviewer.ui.common.viewholders.PostPhotoVH
 import com.grzegorziwanek.tumblrviewer.ui.common.viewholders.PostQuestionVH
 import com.grzegorziwanek.tumblrviewer.ui.common.viewholders.PostRegularVH
@@ -19,7 +19,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
 class BlogAdapter (private val imageLoader: ImageLoader) : RecyclerView.Adapter<PostVH>(),
-    OnGenericClickListener<Post>{
+    OnGenericClickListener<Post> {
 
     private val clickedFavorite = PublishSubject.create<Favourite>()
     private val items = mutableListOf<Post>()
@@ -29,9 +29,7 @@ class BlogAdapter (private val imageLoader: ImageLoader) : RecyclerView.Adapter<
         return getViewHolder(viewType, view)
     }
 
-    override fun onBindViewHolder(holder: PostVH, position: Int) {
-        holder.bind(items[position])
-    }
+    override fun onBindViewHolder(holder: PostVH, position: Int) = holder.bind(items[position])
 
     override fun getItemCount(): Int = items.size
 
@@ -64,7 +62,7 @@ class BlogAdapter (private val imageLoader: ImageLoader) : RecyclerView.Adapter<
             TYPE_REGULAR.second -> PostRegularVH(view, imageLoader, this)
             TYPE_PHOTO.second -> PostPhotoVH(view, imageLoader, this)
             TYPE_ANSWER.second -> PostQuestionVH(view, imageLoader, this)
-            else -> throw Throwable("SearchAdapter getItemViewType, unknown item type, type is $viewType")
+            else -> throw Throwable("BlogAdapter getItemViewType, unknown item type, type is $viewType")
         }
 
     override fun onClick(post: Post) {
@@ -73,9 +71,8 @@ class BlogAdapter (private val imageLoader: ImageLoader) : RecyclerView.Adapter<
         clickedFavorite.onNext(Favourite(name, avatar))
     }
 
-    fun addFavoriteClicked(): Observable<Favourite> {
-        return clickedFavorite.doOnNext { println(it) }
-    }
+    fun addFavoriteClicked(): Observable<Favourite> =
+        clickedFavorite.doOnNext { println(it) }
 
     companion object {
         private val TYPE_PHOTO = Pair("photo", 1)

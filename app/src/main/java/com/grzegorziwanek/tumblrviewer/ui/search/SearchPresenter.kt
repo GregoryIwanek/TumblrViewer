@@ -11,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class SearchPresenter @Inject constructor(private val interactor: BlogInteractor,
+class SearchPresenter @Inject constructor(private val blogInteractor: BlogInteractor,
                                           private val searchInteractor: SearchInteractor,
                                           private val favoritesInteractor: FavoritesInteractor)
     : MviBasePresenter<SearchView, BlogViewState>() {
@@ -21,7 +21,7 @@ class SearchPresenter @Inject constructor(private val interactor: BlogInteractor
         val initIntent: Observable<BlogViewState> =
             intent(SearchView::initIntent)
                 .subscribeOn(Schedulers.io())
-                .flatMap { interactor.getBlogLastSearch() }
+                .flatMap { blogInteractor.getBlogLastSearch() }
 
         val clearIntent: Observable<BlogViewState> =
             intent(SearchView::clearSearchIntent)
@@ -29,7 +29,7 @@ class SearchPresenter @Inject constructor(private val interactor: BlogInteractor
                 .map { SearchViewState.EditState(true) }
 
         val favoriteIntent: Observable<BlogViewState> =
-            intent(SearchView::favoriteIntent)
+            intent(SearchView::addFavoriteIntent)
                 .subscribeOn(Schedulers.io())
                 .flatMap { favoritesInteractor.insertFavorite(it) }
                 .map<BlogViewState> { BlogViewState.MessageState( R.string.added_to_favorites) }
@@ -37,7 +37,7 @@ class SearchPresenter @Inject constructor(private val interactor: BlogInteractor
         val searchIntent: Observable<BlogViewState> =
             intent(SearchView::searchIntent)
                 .subscribeOn(Schedulers.io())
-                .flatMap { interactor.getBlogByName(it) }
+                .flatMap { blogInteractor.getBlogByName(it) }
                 .doOnNext { if (it is BlogViewState.DataState)
                     searchInteractor.storeLastSearch(it.blog.tumblelog.name) }
 

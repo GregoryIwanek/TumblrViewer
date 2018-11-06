@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.grzegorziwanek.tumblrviewer.R
 import com.grzegorziwanek.tumblrviewer.model.data.entity.Favourite
-import com.grzegorziwanek.tumblrviewer.ui.base.BaseMosbyFragment
 import com.grzegorziwanek.tumblrviewer.ui.common.BlogAdapter
 import com.grzegorziwanek.tumblrviewer.ui.common.BlogViewState
+import com.grzegorziwanek.tumblrviewer.ui.common.base.BaseMosbyFragment
 import com.grzegorziwanek.tumblrviewer.ui.main.MainActivity
 import com.grzegorziwanek.tumblrviewer.util.ImageLoader
 import com.grzegorziwanek.tumblrviewer.util.ScrollTransitionAnimator.Companion.DIRECTION_TOP
+import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jakewharton.rxbinding2.support.v7.widget.RecyclerViewScrollEvent
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import dagger.android.support.AndroidSupportInjection
@@ -35,9 +36,8 @@ class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+         inflater.inflate(R.layout.fragment_home, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,16 +62,14 @@ class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
         vsf_states.showProgress()
     }
 
-    override fun initIntent(): Observable<Unit> =
-        Observable.just(Unit)
-            .delay(BASE_MOSBY_RX_DELAY, TimeUnit.MILLISECONDS)
+    override fun initIntent(): Observable<Any> =
+        Observable.merge(Observable.just(Any())
+            .delay(BASE_MOSBY_RX_DELAY, TimeUnit.MILLISECONDS),
+            RxSwipeRefreshLayout.refreshes(srl_refresh)
+                .map {Any()})
 
-    override fun favoriteIntent(): Observable<Favourite> =
+    override fun addFavoriteIntent(): Observable<Favourite> =
         adapter.addFavoriteClicked()
-
-    override fun refreshIntent(): Observable<Unit> =
-        Observable.just(Unit)
-            .delay(BASE_MOSBY_RX_DELAY, TimeUnit.MILLISECONDS)
 
     override fun scrollIntent(): Observable<Int> =
         RxRecyclerView.scrollEvents(rv_posts)
@@ -104,6 +102,7 @@ class HomeFragment : BaseMosbyFragment<HomeView, HomePresenter>(), HomeView {
 
     private fun renderData(state: BlogViewState.DataState) {
         adapter.setData(state.blog.posts)
+        srl_refresh.isRefreshing = false
         vsf_states.showContent()
     }
 

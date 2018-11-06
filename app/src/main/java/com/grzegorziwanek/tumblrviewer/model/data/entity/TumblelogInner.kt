@@ -7,4 +7,4 @@ class TumblelogInner(title: String,
                      name: String,
                      cname: String,
                      @SerializedName("avatar_url_128")
-                     val avatarSmall: String) : Tumblelog(title, description, name, cname)
+                     val avatarSmall: String) : Tumblelog(title, description, name)
