@@ -17,7 +17,7 @@ To code and build this app was used:
 * Android Studio 3.2
 
 **Pattern**
-* MVI with <a href="https://github.com/sockeqwe/mosby" title="Mosby">Mosby</a> + Clean
+* MVI ( Model-View-Intent) with <a href="https://github.com/sockeqwe/mosby" title="Mosby">Mosby</a> + Clean
 
 **Libraries**
 * <a href="https://github.com/sockeqwe/mosby" title="Mosby">Mosby</a>
